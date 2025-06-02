@@ -2,6 +2,17 @@
 
 Settings complimentary to .config
 
+```sh
+# basic structure
+~/dotfiles/
+├── .bashrc
+├── .gitconfig
+├── .config/
+│   └── nvim/
+├── setup.sh       ← This is your bootstrap script
+└── README.md      ← Optional doc for setup steps
+```
+
 ## Symbolic link
 
 ```sh

@@ -117,8 +117,6 @@ if ! shopt -oq posix; then
 fi
 
 # 2025-06-02 begin
-echo "alias gg='git status'" >> ~/.bashrc
+alias gg='git status'
 # 2025-06-02 end
-alias gg='git status'
-alias gg='git status'
-alias gg='git status'
+
