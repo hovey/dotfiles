@@ -1,0 +1,5 @@
+- JOB: "intercept -g /dev/input/by-path/*event-kbd* | dual-function-keys | uinput -d"
+  DEVICE:
+    EVENTS:
+      EV_KEY: [KEY_BACKSPACE, KEY_LEFTALT]
+
