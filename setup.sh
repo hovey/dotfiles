@@ -1,5 +1,14 @@
 #!/bin/bash
+
+echo "🔧 Configuring custom GNOME keyboard shortcuts..."
+
 gsettings set org.gnome.desktop.wm.keybindings close "['<Alt>w']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-side-w "['<Shift><Alt>h']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-side-e "['<Shift><Alt>l']"
+gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Shift><Alt>Return']"
+
+
+echo "✓ GNOME keybindings updated"
 
 # # make alt+backspace act like delete key, for moving to trash
 # sudo apt install -y interception-tools
