@@ -118,5 +118,8 @@ fi
 
 # 2025-06-02 begin
 alias gg='git status'
+alias gd='git diff'
+alias ga='git add'
+alias gc='git commit'
 # 2025-06-02 end
 

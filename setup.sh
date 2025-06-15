@@ -2,10 +2,14 @@
 
 echo "🔧 Configuring custom GNOME keyboard shortcuts..."
 
+# List all gnome keybindings with
+# gsettings list-keys org.gnome.desktop.wm.keybindings
+
 gsettings set org.gnome.desktop.wm.keybindings close "['<Alt>w']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-side-w "['<Super>Left', '<Shift><Alt>h']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-side-e "['<Super>Right', '<Shift><Alt>l']"
 gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Shift><Alt>Return']"
+gsettings set org.gnome.desktop.wm.keybindings maximize-vertically "['<Shift><Alt>v']"
 
 # Define custom shortcut names
 CUSTOM_KEYBINDINGS_BASE="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
