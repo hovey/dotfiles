@@ -1,6 +1,6 @@
 # dotfiles
 
-Settings complimentary to .config
+Settings that are complimentary to `.config`
 
 ```sh
 # basic structure
@@ -10,7 +10,7 @@ Settings complimentary to .config
 ├── .config/
 │   └── nvim/
 ├── setup.sh       ← This is your bootstrap script
-└── README.md      ← Optional doc for setup steps
+└── README.md      ← Optional doc for setup steps (this file)
 ```
 
 ## Symbolic link
@@ -30,9 +30,11 @@ ln -s ~/dotfiles/config/nvim ~/.config/nvim
 
 Result: When you access `~/.config/nvim`, it points to the real file in `~/dotfiles/config/nvim`.
 
-## Applications
+## Ubuntu
 
-### Ulancher
+### Applications
+
+#### Ulancher
 
 ulancher.io
 
@@ -48,7 +50,7 @@ Hot key in Wayland: https://github.com/Ulauncher/Ulauncher/wiki/Hotkey-In-Waylan
 * Delete configuration files: `rm -rf ~/.config/ulauncher`
 * Confirm ulauncher is gone: `ulauncher` should produce `command not found`
 
-### Albert
+#### Albert
 
 * Install dependencies: `sudo apt update`, `sudo apt install curl gnupg`
 * Inport Albert's GPG key: `curl -fsSL https://build.opensuse.org/projects/home:manuelschneid3r/public_key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/albert.gpg > /dev/null`
