@@ -1,0 +1,24 @@
+# To have Git use your ~/dotfiles/git/ignore file as your global .gitignore, you need
+# to set the core.excludesfile configuration variable. You don't "source" it in the
+# typical shell script sense.
+# 
+# Here's how you do it:
+# 
+# git config --global core.excludesfile ~/dotfiles/git/ignore
+#
+# Explanation:
+# 
+# git config: This command is used to get and set Git configuration options.
+# 
+# --global: This flag specifies that the configuration change should apply to all your Git repositories on your system (for your user). This is the correct scope for a global ignore file.
+# 
+# core.excludesfile: This is the specific Git configuration variable that tells Git where to find your global ignore file.
+# 
+# ~/dotfiles/git/ignore: This is the path to your custom global ignore file. Git will automatically expand ~ to your home directory.
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Gemini files
+.gemini/*
