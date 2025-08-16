@@ -123,3 +123,6 @@ alias ga='git add'
 alias gc='git commit'
 # 2025-06-02 end
 
+. "$HOME/.cargo/env"
+
+. "$HOME/.local/bin/env"

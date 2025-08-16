@@ -68,3 +68,10 @@ function cl
     /Users/chovey/rustschool/clap1/target/debug/clap1 $argv
 end
 
+# 2025-08-16
+# Install Nerd Font "Hack" https://www.nerdfonts.com/font-downloads
+# Install Starship terminal https://starship.rs/
+# Add the following to the end of the ~/.config/fish/config.fish file:
+starship init fish | source
+
+
