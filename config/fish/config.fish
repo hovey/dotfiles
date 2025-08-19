@@ -72,6 +72,13 @@ end
 # Install Nerd Font "Hack" https://www.nerdfonts.com/font-downloads
 # Install Starship terminal https://starship.rs/
 # Add the following to the end of the ~/.config/fish/config.fish file:
-starship init fish | source
+# starship init fish | source
+
+# replace above line with a safe check
+# Only initialize Starship if it's installed
+if type -q starship
+    starship init fish | source
+end
+
 
 

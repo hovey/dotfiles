@@ -1,65 +1,99 @@
 #!/bin/bash
 
-echo "🔧 Configuring custom GNOME keyboard shortcuts..."
+# 0. Make sure Homebrew and fish are installed (this is agnostic to Intel vs Apple Silicon):
 
-# List all gnome keybindings with
-# gsettings list-keys org.gnome.desktop.wm.keybindings
+# If brew missing:
+which brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-gsettings set org.gnome.desktop.wm.keybindings close "['<Alt>w']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-side-w "['<Super>Left', '<Shift><Alt>h']"
-gsettings set org.gnome.desktop.wm.keybindings move-to-side-e "['<Super>Right', '<Shift><Alt>l']"
-gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "['<Shift><Alt>Return']"
-gsettings set org.gnome.desktop.wm.keybindings maximize-vertically "['<Shift><Alt>v']"
+# Ensure fish installed:
+brew list fish >/dev/null 2>&1 || brew install fish
 
-# Define custom shortcut names
-CUSTOM_KEYBINDINGS_BASE="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
-KEY1="$CUSTOM_KEYBINDINGS_BASE/custom0/"
-KEY2="$CUSTOM_KEYBINDINGS_BASE/custom1/"
 
-# Register custom keybinding paths
-gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings \
-  "['$KEY1', '$KEY2']"
+# 1. Define paths and make a dated backup folder
 
-# Set Brave browser launcher
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KEY1 name "Launch Brave"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KEY1 command "brave"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KEY1 binding "<Shift><Alt>b"
+# Adjust if you cloned elsewhere
+export DOTFILES="$HOME/dotfiles"
 
-# Set Terminal launcher
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KEY2 name "Launch Terminal"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KEY2 command "gnome-terminal"
-gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$KEY2 binding "<Shift><Alt>t"
+# Dated backup dir to safely stash existing files
+STAMP="$(date +%Y%m%d-%H%M%S)"
+export DF_BAK="$HOME/dotfiles_backup_$STAMP"
+mkdir -p "$DF_BAK"
 
-echo "✓ GNOME keybindings updated"
 
-# # make alt+backspace act like delete key, for moving to trash
-# sudo apt install -y interception-tools
-# # sudo cp ./etc/interception/udevmon.yaml /etc/interception/udevmon.yaml
-# sudo cp ~/dotfiles/etc/interception/udevmon.yaml /etc/interception/udevmon.yaml
-# # sudo cp ./etc/dual-function-keys.yaml /etc/dual-function-keys.yaml
-# sudo cp ~/dotfiles/etc/dual-function-keys.yaml /etc/dual-function-keys.yaml
-# sudo systemctl enable --now udevmon
+# 2. Helper: safe-link function (backs up then symlinks)
 
-# # Install interception-tools and plugin
-# sudo apt install -y interception-tools
-# 
-# # Write dual-function-keys.yaml to remap Alt+Backspace → Delete
-# sudo tee /etc/dual-function-keys.yaml > /dev/null <<EOF
-# MAPPINGS:
-#   - KEY: KEY_BACKSPACE
-#     TAP: KEY_DELETE
-#     HELD: KEY_BACKSPACE
-#     HELD_MODIFIERS: [KEY_LEFTALT]
-# EOF
-# 
-# # Write udevmon.yaml to wire up the remapper to your keyboard device
-# sudo tee /etc/interception/udevmon.yaml > /dev/null <<EOF
-# - JOB: "intercept -g /dev/input/by-path/*event-kbd* | dual-function-keys -c /etc/dual-function-keys.yaml | uinput -d"
-#   DEVICE:
-#     EVENTS:
-#       EV_KEY: [KEY_BACKSPACE, KEY_LEFTALT]
-# EOF
-# 
-# # Enable and start the interception service
-# sudo systemctl enable --now udevmon
+link() {
+  src="$1"; dst="$2"
+  mkdir -p "$(dirname "$dst")"
+  if [ -e "$dst" ] || [ -L "$dst" ]; then
+    echo "Backing up $dst -> $DF_BAK"
+    mv -f "$dst" "$DF_BAK"/
+  fi
+  echo "Linking $dst -> $src"
+  ln -s "$src" "$dst"
+}
+
+
+# 3. Symlink top-level dotfiles
+# To connection with the hovey/dotfiles repo that has .bashrc and .gitconfig
+
+[ -f "$DOTFILES/.bashrc" ]    && link "$DOTFILES/.bashrc"    "$HOME/.bashrc"
+[ -f "$DOTFILES/.gitconfig" ] && link "$DOTFILES/.gitconfig" "$HOME/.gitconfig"
+
+
+# 4. Sym link config directories (e.g., nvim, fish)
+# The hovey/dotfiles README shows config/nvim -> ~/.config/nvim.  Do the same for any
+# other subfolders I keep in the config/ (like fish, etc.)
+
+# Create ~/.config if needed
+mkdir -p "$HOME/.config"
+
+# Link any known config subdirs if they exist in your repo:
+for d in nvim fish; do
+  [ -d "$DOTFILES/config/$d" ] && link "$DOTFILES/config/$d" "$HOME/.config/$d"
+done
+
+
+# 5. Ensure Homebrew is on the PATH for bash and zsh
+# The most reliable, chip-agnostic way:
+#
+# For bash logins (Terminal/iTerm that start bash):
+echo 'eval "$($(brew --prefix)/bin/brew shellenv)"' >> "$HOME/.bash_profile"
+
+# For zsh logins (macOS default since Catalina):
+echo 'eval "$($(brew --prefix)/bin/brew shellenv)"' >> "$HOME/.zprofile"
+
+# 6. Make sure fish also sees Homebrew
+# Once fish runs, set a universal PATH entry so it always finds Homebrew:
+#
+# Start fish once (from bash/zsh):
+fish -c 'set -Ux fish_user_paths (brew --prefix)/bin $fish_user_paths' || true
+
+
+# 7. Verify
+#
+# In your current shell:
+which brew
+which fish
+brew --version
+fish --version
+
+# Try launching fish
+fish -c 'echo $PATH; fish --version'
+
+# 8. (optional) Make fish your login shell
+
+# Allow fish as a login shell (if not already)
+which fish | sudo tee -a /etc/shells
+
+# Switch your account’s shell to fish
+# (optional)
+# chsh -s "$(which fish)"
+
+# Log out/in of iterm2
+
+
+# 9. iterm2 sanity check
+# iterm2 -> settings -> profiles -> general -> command = login shell
+
 
