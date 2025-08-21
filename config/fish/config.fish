@@ -1,23 +1,12 @@
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# eval /opt/homebrew/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
-
-# 2021-07-18 Update Miniconda to Python 3.9
-# eval /Users/sparta/opt/miniconda3/bin/conda "shell.fish" "hook" $argv | source
-
-# set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin /Users/sparta/.ghcup/bin $PATH # ghcup-env
-
 # 2022-02-17 
 # https://github.com/oh-my-fish/theme-bobthefish/blob/master/functions/fish_prompt.fish
 # set -g theme_nerd_fonts yes
 
-
 # 2022-08-28 allow bash-type bang-bang operator to 
 # repeat last command !!
 # and repeat last argument !$
-# Ref: https://superuser.com/questions/719531/what-is-the-equivalent-of-bashs-and-in-the-fish-shell
+# Reference: 
+# https://superuser.com/questions/719531/what-is-the-equivalent-of-bashs-and-in-the-fish-shell
 function bind_bang
     switch (commandline -t)[-1]
         case "!"
@@ -69,16 +58,16 @@ function cl
 end
 
 # 2025-08-16
-# Install Nerd Font "Hack" https://www.nerdfonts.com/font-downloads
+# Install "Hack" Nerd Font https://www.nerdfonts.com/font-downloads
+# to Font Book | My Fonts
+#
 # Install Starship terminal https://starship.rs/
 # Add the following to the end of the ~/.config/fish/config.fish file:
 # starship init fish | source
-
+#
 # replace above line with a safe check
 # Only initialize Starship if it's installed
 if type -q starship
     starship init fish | source
 end
-
-
 
