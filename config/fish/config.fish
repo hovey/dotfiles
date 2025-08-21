@@ -71,16 +71,3 @@ if type -q starship
     starship init fish | source
 end
 
-# 2025-08-21
-# Weather forcast
-
-# Fetch and display weather for Portland, ME in Fahrenheit
-set portland_weather (curl -s "wttr.in/Portland,ME?format=%C+%t&u")
-# echo "Weather forecast for Portland, ME:"
-echo "Portland ME: $portland_weather"
-
-# Fetch and display weather for Albuquerque, NM in Fahrenheit
-set albuquerque_weather (curl -s "wttr.in/Albuquerque,NM?format=%C+%t&u")
-# echo "Weather forecast for Albuquerque, NM:"
-echo "Albuquerque NM: $albuquerque_weather"
-
