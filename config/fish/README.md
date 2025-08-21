@@ -16,3 +16,4 @@ brew install starship
 
 # add this to your ~/.config/fish/config.fish
 starship init fish | source
+
