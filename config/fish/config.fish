@@ -70,4 +70,8 @@ end
 if type -q starship
     starship init fish | source
 end
+#
+# The above commands tell Fish to use Starship, https://starship.rs/, 
+# instead of fish_prompt (in ~/.config/fish/config.fish), to create the prompt.
+# the Starship configuration lives at ~/.config/starship.toml
 
