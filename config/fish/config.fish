@@ -1,3 +1,6 @@
+# Greeting.
+echo "~/dotfiles/config/fish/config.fish is working..."
+
 # 2022-02-17 
 # https://github.com/oh-my-fish/theme-bobthefish/blob/master/functions/fish_prompt.fish
 # set -g theme_nerd_fonts yes
@@ -70,4 +73,22 @@ end
 if type -q starship
     starship init fish | source
 end
+
+
+# 2025-08-25
+# After brew installation of hdf5
+# brew install hdf5
+# the environment variables must be set
+# HDF5 configuration
+set -gx HDF5_DIR (brew --prefix hdf5)
+set -gx HDF5_LIBRARY_PATH (brew --prefix hdf5)/lib
+set -gx HDF5_INCLUDE_PATH (brew --prefix hdf5)/include
+
+echo "  HDF5 environment variables configured in fish:"
+echo "  HDF5_DIR: $HDF5_DIR"
+echo "  HDF5_LIBRARY_PATH: $HDF5_LIBRARY_PATH"
+echo "  HDF5_INCLUDE_PATH: $HDF5_INCLUDE_PATH"
+
+# Farewell 
+echo "~/dotfiles/config/fish/config.fish is done."
 
