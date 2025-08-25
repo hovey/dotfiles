@@ -55,7 +55,7 @@ abbr -a ga 'git add'
 abbr -a la 'pdflatex -shell-escape --output-directory=temp main.tex'
 
 # 2025-04-01
-# create a debugt alias for clap1, Rust command line exercises
+# create a debug alias for clap1, Rust command line exercises
 function cl
     /Users/chovey/rustschool/clap1/target/debug/clap1 $argv
 end
