@@ -1,0 +1,21 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Gemini files
+.gemini/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.bak
+
+# Build/Log Files
+*.log
+*.class
+bin/
+target/
+
+# General
+.env
