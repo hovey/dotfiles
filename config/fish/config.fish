@@ -93,6 +93,9 @@ echo "  HDF5_DIR: $HDF5_DIR"
 echo "  HDF5_LIBRARY_PATH: $HDF5_LIBRARY_PATH"
 echo "  HDF5_INCLUDE_PATH: $HDF5_INCLUDE_PATH"
 
+# hdf5 requires cmake, so install cmake too
+# brew install cmake
+
 # Farewell 
 echo "~/dotfiles/config/fish/config.fish is done."
 

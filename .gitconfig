@@ -1,3 +1,5 @@
 [user]
 	email = hovey@me.com
 	name = Chad Hovey
+[core]
+	excludesfile = /Users/chovey/dotfiles/git/.gitignore_global

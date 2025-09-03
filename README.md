@@ -30,6 +30,38 @@ ln -s ~/dotfiles/config/nvim ~/.config/nvim
 
 Result: When you access `~/.config/nvim`, it points to the real file in `~/dotfiles/config/nvim`.
 
+## macOS
+
+### For bash configurations
+
+```sh
+# Backup existing files first (if they exist)
+mv ~/.bashrc ~/.bashrc.backup 2>/dev/null || true
+mv ~/.gitconfig ~/.gitconfig.backup 2>/dev/null || true
+
+# Create symlinks
+ln -s ~/dotfiles/.bashrc ~/.bashrc
+ln -s ~/dotfiles/.gitconfig ~/.gitconfig
+```
+
+### For fish configurations
+
+First, check if you have fish config in your dotfiles:
+
+```sh
+ls -la ~/dotfiles/.config/
+# no such directory
+
+# Create .config directory if it doesn't exist
+mkdir -p ~/.config
+
+# Backup existing fish config if it exists
+mv ~/.config/fish ~/.config/fish.backup 2>/dev/null || true
+
+# Create symlink (adjust path based on what's actually in your repo)
+ln -s ~/dotfiles/.config/fish ~/.config/fish
+```
+
 ## Ubuntu
 
 ### Applications
