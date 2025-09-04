@@ -17,6 +17,7 @@
 - Use NamedTuples and create immutable types when possible.
 - Do not use unittest; use only pytest.
 - For testing and test-driven design (TDD), follow the red-green-refactor cycle.
+- Opening test files should always specify encoding="utf8", for exmaple, with this line of code: with open(mock_github_env_file, "r", encoding="utf8") as f:
 
 ## Code Clarity and Robustness:
 
