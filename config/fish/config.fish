@@ -88,10 +88,12 @@ set -gx HDF5_DIR (brew --prefix hdf5)
 set -gx HDF5_LIBRARY_PATH (brew --prefix hdf5)/lib
 set -gx HDF5_INCLUDE_PATH (brew --prefix hdf5)/include
 
+echo "  ----------------------------------------------"
 echo "  HDF5 environment variables configured in fish:"
-echo "  HDF5_DIR: $HDF5_DIR"
+echo "  HDF5_DIR:          $HDF5_DIR"
 echo "  HDF5_LIBRARY_PATH: $HDF5_LIBRARY_PATH"
 echo "  HDF5_INCLUDE_PATH: $HDF5_INCLUDE_PATH"
+echo "  ----------------------------------------------"
 
 # hdf5 requires cmake, so install cmake too
 # brew install cmake
