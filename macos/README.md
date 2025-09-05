@@ -8,6 +8,9 @@
 * Cubit-16.18.2-Mac64.dmg
 * MacTeX.pkg
 * Hack.zip  // Nerd fonts
+* cargo
+  * cargo install mdbook
+  * cargo install mdbook-katex
 
 ## screenshots
 
