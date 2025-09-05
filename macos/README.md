@@ -1,5 +1,14 @@
 # Settings - macOS modifications
 
+## installers
+
+* brew
+* ParaView-5.13.1-arm-Sandia.dmg
+* Cubit-16.18.1-Mac64.dmg
+* Cubit-16.18.2-Mac64.dmg
+* MacTeX.pkg
+* Hack.zip  // Nerd fonts
+
 ## screenshots
 
 macOS screenshots from .png to .jpg by default
