@@ -31,6 +31,22 @@ killall Finder
 
 and menu View | Show Pathbar
 
+## show file extensions
+
+
+```sh
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+killall Finder
+```
+
+## show hidden files
+
+```sh
+defaults write com.apple.finder AppleShowAllFiles true
+killall Finder
+```
+
+
 ## vs code
 
 
