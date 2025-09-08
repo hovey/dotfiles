@@ -65,6 +65,14 @@ killall Finder
 -string "PfHm": This sets the value of the key to "PfHm". 
 This is a special code that represents the Path for Home directory, which is your ~ folder.
 
+## Update the date format from mm/dd/yy to YYYY-mm-dd
+
+Excel uses the format in System settings:
+
+System settings, General, Language & Region
+
+Date format: from 8/19/25 to 2025-08-19
+
 ## vs code
 
 ### Color Scheme
