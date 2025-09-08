@@ -46,9 +46,26 @@ defaults write com.apple.finder AppleShowAllFiles true
 killall Finder
 ```
 
+## trackpad press and hold (force click) brings up dictionary, how to stop that
+
+On system settings, track pad, point & click, there is "Force Click and haptic feedback"
+this can be turned off via (didn't work, so update settings with the GUI to turn off)
+
+```sh
+defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -bool true
+```
+
+# new finder does "Recent", how to make it go to "home" instead?
+
+```sh
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+killall Finder
+```
+
+-string "PfHm": This sets the value of the key to "PfHm". 
+This is a special code that represents the Path for Home directory, which is your ~ folder.
 
 ## vs code
-
 
 ### Color Scheme
 
