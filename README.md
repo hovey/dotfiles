@@ -59,7 +59,9 @@ mkdir -p ~/.config
 mv ~/.config/fish ~/.config/fish.backup 2>/dev/null || true
 
 # Create symlink (adjust path based on what's actually in your repo)
-ln -s ~/dotfiles/.config/fish ~/.config/fish
+(deprecated) ln -s ~/dotfiles/.config/fish ~/.config/fish
+(remove old sym link if it already exists) rm ~/.config/fish
+ln -s ~/dotfiles/config/fish ~/.config/fish
 ```
 
 ## Ubuntu

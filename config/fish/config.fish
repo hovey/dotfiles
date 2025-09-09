@@ -1,4 +1,5 @@
 # Greeting.
+echo "================================================"
 echo "~/dotfiles/config/fish/config.fish is working..."
 
 # 2022-02-17 
@@ -34,10 +35,13 @@ function fish_user_key_bindings
     bind '$' bind_dollar
 end
 
-# 2024-06-03
-#  chovey@s1088757/Users/chovey> eval "$(/opt/homebrew/bin/brew shellenv)"
-#  chovey@s1088757/Users/chovey> which brew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if test (uname) = "Darwin"
+    # macOS-specific code
+    # 2024-06-03
+    #  chovey@s1088757/Users/chovey> eval "$(/opt/homebrew/bin/brew shellenv)"
+    #  chovey@s1088757/Users/chovey> which brew
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+end
 
 # 2025-01-07
 # make a permanent alias across all fish sessions
@@ -79,25 +83,39 @@ end
 # the Starship configuration lives at ~/.config/starship.toml
 
 
-# 2025-08-25
-# After brew installation of hdf5
-# brew install hdf5
-# the environment variables must be set
-# HDF5 configuration
-set -gx HDF5_DIR (brew --prefix hdf5)
-set -gx HDF5_LIBRARY_PATH (brew --prefix hdf5)/lib
-set -gx HDF5_INCLUDE_PATH (brew --prefix hdf5)/include
+if test (uname) = "Darwin"
+    # macOS-specific code
 
-echo "  ----------------------------------------------"
-echo "  HDF5 environment variables configured in fish:"
-echo "  HDF5_DIR:          $HDF5_DIR"
-echo "  HDF5_LIBRARY_PATH: $HDF5_LIBRARY_PATH"
-echo "  HDF5_INCLUDE_PATH: $HDF5_INCLUDE_PATH"
-echo "  ----------------------------------------------"
+    # 2025-08-25
+    # After brew installation of hdf5
+    # brew install hdf5
+    # the environment variables must be set
+    # HDF5 configuration
+    set -gx HDF5_DIR (brew --prefix hdf5)
+    set -gx HDF5_LIBRARY_PATH (brew --prefix hdf5)/lib
+    set -gx HDF5_INCLUDE_PATH (brew --prefix hdf5)/include
+    
+    echo "  ----------------------------------------------"
+    echo "  HDF5 environment variables configured in fish:"
+    echo "  HDF5_DIR:          $HDF5_DIR"
+    echo "  HDF5_LIBRARY_PATH: $HDF5_LIBRARY_PATH"
+    echo "  HDF5_INCLUDE_PATH: $HDF5_INCLUDE_PATH"
+    echo "  ----------------------------------------------"
+    
+    # hdf5 requires cmake, so install cmake too
+    # brew install cmake
+end
 
-# hdf5 requires cmake, so install cmake too
-# brew install cmake
+if not contains "$HOME/.cargo.bin" $PATH
+    # Prepend the path in case a system-installed rustc needs
+    # to be overwritten by the definition below:
+    echo "  ----------------------------------------------"
+    set -gx PATH "$HOME/.cargo/bin" $PATH
+    echo "  set PATH to include HOME/.cargo/bin"
+    echo "  ----------------------------------------------"
+end
 
 # Farewell 
 echo "~/dotfiles/config/fish/config.fish is done."
+echo "==========================================="
 
