@@ -67,3 +67,10 @@ Click the slider to turn it "ON".  A pop-up will appear to confirm.  Click Insta
 
 Restart the Gnome shell.
 
+## Install vscode
+
+Snap is a package management system that comes pre-installed on
+recent Ubuntu versions.  This is the simplist way to install
+VS Code and to make sure it automatically stays updated.
+
+sudo snap install code --classic
