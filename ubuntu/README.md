@@ -25,3 +25,45 @@ echo $SHELL
 
 The output should be something like `/usr/bin/fish`.
 
+## Disable Multiple Workspaces
+
+Settings, Multitasking, Workspaces, set number to 1
+
+## Install Nerd Font Hack
+
+1. Create a fonts directory
+
+mkdir -p ~/.local/share/fonts
+
+2. Download the Hack Nerd Font, Hack.zip.  Unzip
+
+unzip ~/Downloads/Hack.zip -d ~/.local/share/fonts/
+
+3. Update the font cache
+
+fc-cache -fv
+
+After installation, you need to configure the terminal and other applications to use the
+new font.  For terminal, open termina's preferneces and select Hack Nerd Font.
+
+Hack Nerd Font didn't look good, so reverted to original font, DejaVu Sans Mono.
+
+## gTile for Ubuntu, similar to Magnet for macOS
+
+gTile is a GNOME Shell extension that provides advanced tiling capabilities.
+
+1. Install
+
+sudo apt update
+sudo apt install gnome-shell-extension-manager
+
+2. Go to the gTile extension page:
+https://extensions.gnome.org/extension/28/gtile/
+
+3. Install the extension:
+Click the slider to turn it "ON".  A pop-up will appear to confirm.  Click Install.
+
+4. Manage with the Extension Manager.  Open Extension Manager from applications to configure.
+
+Restart the Gnome shell.
+
