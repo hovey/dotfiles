@@ -46,10 +46,12 @@ end
 # 2025-01-07
 # make a permanent alias across all fish sessions
 function am
-    /Users/chovey/autotwin/automesh/target/release/automesh $argv
+    # /Users/chovey/autotwin/automesh/target/release/automesh $argv
+    $HOME/autotwin/automesh/target/release/automesh $argv
 end
 function amd
-    /Users/chovey/autotwin/automesh/target/debug/automesh $argv
+    # /Users/chovey/autotwin/automesh/target/debug/automesh $argv
+    $HOME/autotwin/automesh/target/debug/automesh $argv
 end
 
 # 2025-06-19
@@ -61,7 +63,8 @@ abbr -a la 'pdflatex -shell-escape --output-directory=temp main.tex'
 # 2025-04-01
 # create a debug alias for clap1, Rust command line exercises
 function cl
-    /Users/chovey/rustschool/clap1/target/debug/clap1 $argv
+    # /Users/chovey/rustschool/clap1/target/debug/clap1 $argv
+    $HOME/rustschool/clap1/target/debug/clap1 $argv
 end
 
 # 2025-08-16
