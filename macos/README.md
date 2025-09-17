@@ -87,3 +87,8 @@ Cmd + K + T       // select colorscheme
 One Monokai Theme
 https://marketplace.visualstudio.com/items?itemName=azemoh.one-monokai
 
+## rg (RIP grep)
+
+```sh
+brew install ripgrep
+```
