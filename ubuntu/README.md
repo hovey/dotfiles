@@ -74,3 +74,8 @@ recent Ubuntu versions.  This is the simplist way to install
 VS Code and to make sure it automatically stays updated.
 
 sudo snap install code --classic
+
+## Install mdbook
+
+sudo snap install mdbook
+
