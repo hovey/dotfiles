@@ -92,3 +92,25 @@ https://marketplace.visualstudio.com/items?itemName=azemoh.one-monokai
 ```sh
 brew install ripgrep
 ```
+
+## install pkg-config
+
+For debugging why automesh doesn't compile when trying to link to ZLIB.
+
+The Rust netcdf crate has two ways to work:
+
+1. Use the system NetCDF (which is what we want) - faster, more reliable, uses my Homebrew installation
+2. Build from source (what is happening with `cargo build` on automesh), which is slower, error-prone, tries to compile NetCDF during the Rust build.
+
+If I were to uninstall NetCDF via Homebrew, the netcdf crate will be force dto build from source, which is exactly the problematic path I'm experiencing now.
+
+The problem isn't that I have NetCDF installed - it's that the Rust build system isn't findibng or using my Homebrew NetCDF installation properly.  Instead, the Rust build system is falling back to building from source via `netcdf-src`.
+
+```sh
+export NETCDF_DIR=/opt/homebrew
+export HDF5_DIR=/opt/homebrew
+export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:$PKG_CONFIG_PATH"
+cargo clean
+cargo build
+```
+
