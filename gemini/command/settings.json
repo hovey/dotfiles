@@ -1,40 +1,36 @@
 {
-  "autoAccept": false,
-  "coreTools": [
-    "FileTool(read)",
-    "FileTool(write)",
-    "ReadFile",
-    "ReadManyFiles",
-    "ShellTool(python)",
-    "ShellTool(pip)"
-  ],
-  "excludeTools": [
-    "ShellTool(rm -rf)",
-    "ShellTool(sudo)",
-    "ShellTool(mv)",
-    "WebTool"
-  ],
-  "fileFiltering": {
-    "respectGitIgnore": true,
-    "include": [
-      "**/*.py",
-      "**/*.md",
-      "**/*.txt",
-      "**/*.json",
-      "**/*.yaml",
-      "**/*.yml",
-      "**/*.ini",
-      "**/*.toml",
-      "**/*.csv",
-      "**/*.log",
-      "**/*.html",
-      "**/*.css"
+    "autoAccept": false,
+    "coreTools": [
+        "FileTool(read)",
+        "FileTool(write)",
+        "ReadFile",
+        "ReadManyFiles",
+        "ShellTool(python)",
+        "ShellTool(pip)",
     ],
-    "exclude": [
-      "**/node_modules/**",
-      "**/.git/**",
-      "**/secrets.py"
-    ]
-  },
-  "theme": "Dracula"
+    "excludeTools": [
+        "ShellTool(rm -rf)",
+        "ShellTool(sudo)",
+        "ShellTool(mv)",
+        "WebTool",
+    ],
+    "fileFiltering": {
+        "respectGitIgnore": true,
+        "include": [
+            "**/*.py",
+            "**/*.md",
+            "**/*.txt",
+            "**/*.json",
+            "**/*.yaml",
+            "**/*.yml",
+            "**/*.ini",
+            "**/*.toml",
+            "**/*.csv",
+            "**/*.log",
+            "**/*.html",
+            "**/*.css",
+        ],
+        "exclude": ["**/node_modules/**", "**/.git/**", "**/secrets.py"],
+    },
+    "theme": "Dracula",
 }
