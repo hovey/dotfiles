@@ -11,6 +11,7 @@
 * cargo
   * cargo install mdbook
   * cargo install mdbook-katex
+  * cargo install mdbook-cmdrun
 
 ## screenshots
 
