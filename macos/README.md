@@ -74,6 +74,19 @@ System settings, General, Language & Region
 
 Date format: from 8/19/25 to 2025-08-19
 
+## napari
+
+A fast, interactive viewer for multi-dimensional images in Python.
+
+https://napari.org/stable/
+
+```sh
+cd ~/autotwin/experiment
+source .venv/bin/activate
+uv pip install "napari[all]"
+napari # run from the command line
+```
+
 ## vs code
 
 ### Color Scheme
