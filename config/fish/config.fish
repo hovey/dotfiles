@@ -47,11 +47,25 @@ end
 # make a permanent alias across all fish sessions
 function am
     # /Users/chovey/autotwin/automesh/target/release/automesh $argv
-    $HOME/autotwin/automesh/target/release/automesh $argv
+    set file $HOME/autotwin/automesh/target/release/automesh
+    if test -f $file
+        $file $argv
+	# $HOME/autotwin/automesh/target/release/automesh $argv
+    else
+        echo -e "Binary file not found:\n  $file"
+        echo -e "build automesh:\n  cargo build --release"
+    end
 end
 function amd
     # /Users/chovey/autotwin/automesh/target/debug/automesh $argv
-    $HOME/autotwin/automesh/target/debug/automesh $argv
+    set file $HOME/autotwin/automesh/target/debug/automesh
+    if test -f $file
+        $file $argv
+	# $HOME/autotwin/automesh/target/debug/automesh $argv
+    else
+        echo -e "Binary file not found:\n  $file"
+        echo -e "build automesh:\n  cargo build"
+    end
 end
 
 # 2025-06-19
