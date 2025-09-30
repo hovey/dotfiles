@@ -132,6 +132,25 @@ if not contains "$HOME/.cargo.bin" $PATH
     echo "  ----------------------------------------------"
 end
 
+
+# 2025-09-30 SNL Certificate work for Rust and VPN active
+# Run the proxydetect.sh script
+echo "Make sure you have proxydetect.sh in your ~ path"
+bash ~/proxydetect.sh
+
+# Check the exit status of the last command
+if test $status -eq 0
+    set -x HTTP_PROXY http://proxy.sandia.gov:80
+    set -x HTTPS_PROXY http://proxy.sandia.gov:80
+    set -x ALL_PROXY http://proxy.sandia.gov:80
+    set -x NO_PROXY '127.0.0.1,localhost,*.sandia.gov,.sandia.gov,sandia.gov,::1,10.,172.16.,172.17.,192.168.,*.local,.local,169.254/16'
+    set -x http_proxy $HTTP_PROXY
+    set -x https_proxy $HTTPS_PROXY
+    set -x all_proxy $ALL_PROXY
+    set -x no_proxy $NO_PROXY
+end
+
+
 # Farewell 
 echo "~/dotfiles/config/fish/config.fish is done."
 echo "==========================================="

@@ -128,3 +128,121 @@ cargo clean
 cargo build
 ```
 
+## Proxy settings
+
+Create or update the `~/.config/pip/pip.conf` file:
+
+```sh
+[global]
+# index = https://nexus.web.sandia.gov/repository/pypi-proxy
+# index-url = https://nexus.web.sandia.gov/repository/pypi-proxy/simple
+proxy = proxy.sandia.gov:80
+trusted-host = py.pi.org, files.pythonhosted.org
+```
+
+## Certificate
+
+* zscalar info
+  * https://wiki.sandia.gov/pages/viewpage.action?pageId=227381234#SandiaProxyConfiguration,Troubleshooting&HTTPS/SSLinterception-MacOSX(Apple)
+
+Create [`proxydetect.sh`](proxydetect.sh), place it in the root (`~`),and `chmod +x ~/proxydetect.sh`
+
+```sh
+#!/usr/bin/env bash
+#
+# check-vpn-connected
+#
+# Determines if the Global Protect VPN is connected. The detection method uses
+# a comparison of the client's configured IP addresses and the active network
+# interface addresses.
+#
+# - If VPN is connected, the script exits with code 0.
+#
+# - If VPN is NOT connected, the script exits with code 1.
+#
+# Arguments:
+#
+#   -v | --verbose  Prints out a message to STDERR if not connected.
+#   -d | --debug    Prints debugging info. Implies --verbose.
+#
+# shellcheck disable=SC2155
+#   (see https://github.com/koalaman/shellcheck/wiki)
+#
+
+main() {
+  # check network location first, always set proxies on SRN Wired
+  # this is my only contribution to a script borrowed from https://gist.github.com/kaleksandrov/3cfee92845a403da995e7e44ba771183
+  local netloc=$(networksetup -getcurrentlocation)
+  if [[ $netloc == "SRN Wired" ]]; then
+    exit 0;
+  fi
+
+  local verbose=0;
+  local debug=0;
+  local ipv4AddressRegex="(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --verbose|-v)
+        # Verbose output.
+        verbose=1;
+        ;;
+
+      --debug|-d)
+        # Debug output; implies verbose.
+        debug=1;
+        verbose=1;
+    esac;
+    shift;
+  done;
+
+  # Get the active interface addresses.
+  # shellcheck disable=SC2207
+  # IPv6 support would require filtering on 'inet6' and an IPv6 regex.
+  local interfaceIPs=($(ifconfig -a -u inet | grep -F "inet" | grep -oE "${ipv4AddressRegex}"));
+  if [[ "${debug}" -ne 0 ]]; then
+    >&2 echo "Interface Addresses: ${interfaceIPs[*]}";
+  fi;
+
+  # Read Global Protect client configuration, return the listed IPv4 addresses.
+  # IPv6 support would require filtering on 'PreferredIPv6_' and an IPv6 regex.
+  IFS=$'\n' read -d '' -r -a vpnIPs < <( \
+    defaults read /Library/Preferences/com.paloaltonetworks.GlobalProtect.settings.plist | \
+    grep -F "PreferredIP_" | \
+    grep -oE "${ipv4AddressRegex}" \
+  );
+  if [[ "${debug}" -ne 0 ]]; then
+    >&2 echo "VPN IPs: ${vpnIPs[*]}";
+  fi;
+
+  # If one of the interface IPs matches one of the VPN IPs then the VPN is connected.
+  # printf converts the bash array into a pipe-delimited list and XXXX is a never-match last element.
+  if grep -qE "($(printf '%s|' "${interfaceIPs[@]}")XXXX)" <<< "${vpnIPs[@]}"; then
+    exit 0;
+  else
+    if [[ "${verbose}" -ne 0 ]]; then
+      >&2 echo "$(tput setaf 208)Active VPN connection required!$(tput op)";
+    fi;
+
+    exit 1;
+  fi;
+}
+
+main "$@";
+```
+
+Add the following to `~/.bashrc` (or `~/.zshrc` or `~/.bash_profile`):
+
+```sh
+bash ~/proxydetect.sh
+if [[ $? == 0 ]]; then
+    export HTTP_PROXY=http://proxy.sandia.gov:80
+    export HTTPS_PROXY=http://proxy.sandia.gov:80
+    export ALL_PROXY=http://proxy.sandia.gov:80
+    export NO_PROXY=127.0.0.1,localhost,*.sandia.gov,.sandia.gov,sandia.gov,::1,10.,172.16.,172.17.,192.168.,*.local,.local,169.254/16
+    export http_proxy=${HTTP_PROXY}
+    export https_proxy=${HTTPS_PROXY}
+    export all_proxy=${ALL_PROXY}
+    export no_proxy=${NO_PROXY}
+fi
+```
