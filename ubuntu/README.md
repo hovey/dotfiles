@@ -79,3 +79,13 @@ sudo snap install code --classic
 
 sudo snap install mdbook
 
+## Paraview
+
+sudo apt update
+sudo apt install paraview
+paraview
+
+(CBH dit NOT need, but noted:)
+If you encounter an error related to a missing Qt platform plugin (like xcb), you may need:
+sudo apt install libxcb-xinerama0 libxcb-xinput0
+

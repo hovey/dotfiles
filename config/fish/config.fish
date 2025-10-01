@@ -46,6 +46,7 @@ end
 # 2025-01-07
 # make a permanent alias across all fish sessions
 function am
+    echo "This is function 'am' in ~/dotfiles/config/fish/config.fish..."
     # /Users/chovey/autotwin/automesh/target/release/automesh $argv
     set file $HOME/autotwin/automesh/target/release/automesh
     if test -f $file
@@ -57,6 +58,7 @@ function am
     end
 end
 function amd
+    echo "This is function 'amd' in ~/dotfiles/config/fish/config.fish..."
     # /Users/chovey/autotwin/automesh/target/debug/automesh $argv
     set file $HOME/autotwin/automesh/target/debug/automesh
     if test -f $file
