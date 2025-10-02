@@ -246,3 +246,12 @@ if [[ $? == 0 ]]; then
     export no_proxy=${NO_PROXY}
 fi
 ```
+
+The `proxydetect.sh` interferes with `brew upgrade`, so
+
+```sh
+mv proxydetect.sh proxydetect.sh.bak
+brew upgrade
+mv proxydetect.sh.bak proxydetect.sh 
+```
+
