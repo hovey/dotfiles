@@ -255,3 +255,9 @@ brew upgrade
 mv proxydetect.sh.bak proxydetect.sh 
 ```
 
+## Disable capslock (caps lock)
+
+Open system settings, keyboard, Keyboard Shortcuts... button, Modifier Keys, Caps Lock map to Escape (or No Action).
+Escape is useful for VIM.
+
+
