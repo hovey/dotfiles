@@ -260,4 +260,9 @@ mv proxydetect.sh.bak proxydetect.sh
 Open system settings, keyboard, Keyboard Shortcuts... button, Modifier Keys, Caps Lock map to Escape (or No Action).
 Escape is useful for VIM.
 
+## SNL Proxy
+
+```sh
+pip install --proxy http://proxy.sandia.gov:80 --trusted-host pypi.org --trusted-host files.pythonhosted.org <package>
+```
 
