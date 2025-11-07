@@ -123,6 +123,17 @@ if test (uname) = "Darwin"
     
     # hdf5 requires cmake, so install cmake too
     # brew install cmake
+
+    # 2025-11-07
+    # NETCDF configuration
+    # bash: export NETCDF_DIR=/opt/homebrew
+    # fish: set -gx NETCDF_DIR /opt/homebrew
+    set -gx NETCDF_DIR /opt/homebrew
+    echo "  ----------------------------------------------"
+    echo "  NETCDF environment variables configured in fish:"
+    echo "  NETCDF_DIR:        $NETCDF_DIR"
+    echo "  ----------------------------------------------"
+
 end
 
 if not contains "$HOME/.cargo.bin" $PATH
