@@ -4,6 +4,7 @@
 
 https://wiki.sandia.gov/pages/viewpage.action?spaceKey=CEE9&title=SRN+CEE+Engineering+Workspace
 
+Engineering Workspace (hpws)
 Network (non-local) storage to /home, /porjects, /fgs
 16 CPU, 64 MB RAM
 (vs Mac M4 with 36 GB RAM)
