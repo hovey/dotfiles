@@ -49,6 +49,7 @@ function am
     echo "This is function 'am' in ~/dotfiles/config/fish/config.fish..."
     # /Users/chovey/autotwin/automesh/target/release/automesh $argv
     set file $HOME/autotwin/automesh/target/release/automesh
+    echo -e "$file"
     if test -f $file
         $file $argv
 	# $HOME/autotwin/automesh/target/release/automesh $argv
@@ -61,6 +62,7 @@ function amd
     echo "This is function 'amd' in ~/dotfiles/config/fish/config.fish..."
     # /Users/chovey/autotwin/automesh/target/debug/automesh $argv
     set file $HOME/autotwin/automesh/target/debug/automesh
+    echo -e "$file"
     if test -f $file
         $file $argv
 	# $HOME/autotwin/automesh/target/debug/automesh $argv
