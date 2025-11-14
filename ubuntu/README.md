@@ -89,3 +89,4 @@ paraview
 If you encounter an error related to a missing Qt platform plugin (like xcb), you may need:
 sudo apt install libxcb-xinerama0 libxcb-xinput0
 
+
