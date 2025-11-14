@@ -89,4 +89,21 @@ paraview
 If you encounter an error related to a missing Qt platform plugin (like xcb), you may need:
 sudo apt install libxcb-xinerama0 libxcb-xinput0
 
+## PYPI
+
+2025-11-14, create API token for IBM Thinkpad Ubuntu laptop
+Add new token
+Token name: ThinkPad_Ubuntu
+Permissions: Upload packages
+Scope: Entire account (all projects)
+T o k e n:
+pypi-some-long-number
+
+Using this token
+To use this API token:
+
+Set your username to __token__
+Set your password to the token value, including the pypi- prefix
+For example, if you are using Twine to upload your projects to PyPI, set up your $HOME/.pypirc file like this:
+For more details, see 1P.
 
