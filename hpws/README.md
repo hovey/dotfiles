@@ -79,3 +79,7 @@ ssh hpws0128 (Andrew's machine)
 * VSCode
   * Connect to server
     * ssh chovey@hpws0275.sandia.gov
+
+### 2025-12-11
+
+* Contacted Clint Stimpson (cjstimp@sandia.gov), who is also accessing hpws0275.sandia.gov, submitted a ticket.
