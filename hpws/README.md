@@ -83,3 +83,15 @@ ssh hpws0128 (Andrew's machine)
 ### 2025-12-11
 
 * Contacted Clint Stimpson (cjstimp@sandia.gov), who is also accessing hpws0275.sandia.gov, submitted a ticket.
+From: hpconestop <hpconestop@sandia.gov>
+Date: Thursday, December 11, 2025 at 17:57
+To: Hovey, Chad Brian <chovey@sandia.gov>
+Subject: ONESTOP-159473 (CEE High Performance Workspace) ssh hpws0275 has two users (?)
+
+Dear Chad Brian Hovey,
+
+Henry Swantner says:
+---------------------------------------------------------------
+I can confirm, hpws0275.sandia.gov is currently assigned to cjstimp.
+I show that hpws0124.sandia.gov is currently assigned to chovey.
+
