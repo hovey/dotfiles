@@ -95,3 +95,12 @@ Henry Swantner says:
 I can confirm, hpws0275.sandia.gov is currently assigned to cjstimp.
 I show that hpws0124.sandia.gov is currently assigned to chovey.
 
+If you do still see a rogue user, you can reboot to clear the login. Here are the instructions. https://wiki.sandia.gov/display/HOK/Reboot+Your+CEE+Workspace+using+Leostream
+
+If it continues, reply to this email and we will look into it further.
+
+Henry
+OneStop Support
+
+Machine rebboot
+
