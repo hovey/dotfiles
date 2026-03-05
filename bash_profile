@@ -38,3 +38,12 @@ if [[ $? == 0 ]]; then
     export no_proxy=${NO_PROXY}
 fi
 
+# PYENV is too slow
+# # 2026-02-18, updates for pyenv, begin
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+# echo "✓ PYENV environment variables set"
+# # 2026-02-18, updates for pyenv, end
+
+

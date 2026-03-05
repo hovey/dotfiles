@@ -165,6 +165,12 @@ if test $status -eq 0
     set -x no_proxy $NO_PROXY
 end
 
+# PYENV is too slow
+# echo "PYENV settings"
+# set -Ux PYENV_ROOT $HOME/.pyenv
+# fish_add_path $PYENV_ROOT/bin
+# echo 'pyenv init - | source' >> ~/.config/fish/config.fish
+
 
 # Farewell 
 echo "~/dotfiles/config/fish/config.fish is done."
