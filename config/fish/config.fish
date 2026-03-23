@@ -112,9 +112,66 @@ if test (uname) = "Darwin"
     # brew install hdf5
     # the environment variables must be set
     # HDF5 configuration
-    set -gx HDF5_DIR (brew --prefix hdf5)
-    set -gx HDF5_LIBRARY_PATH (brew --prefix hdf5)/lib
-    set -gx HDF5_INCLUDE_PATH (brew --prefix hdf5)/include
+    
+    # 2026-03-11 brew uninstall 
+    # > h5cc -showconfig | grep "HDF5 Version" # HDF5 Version: 2.1.0, which is too new
+    # for automesh v0.3.8, which needs 1.14.x
+    # downgrade
+    # > brew uninstall --ignore-dependencies hdf5
+    # > brew install hdf5@1.10
+    # > brew link --force hdf5@1.10
+    # set -gx HDF5_DIR (brew --prefix hdf5)
+    # set -gx HDF5_LIBRARY_PATH (brew --prefix hdf5)/lib
+    # set -gx HDF5_INCLUDE_PATH (brew --prefix hdf5)/include
+
+    # hdf5@1.10 is keg-only, which means it was not symlinked into /opt/homebrew,
+    # because this is an alternate version of another formula.
+    # 
+    # If you need to have hdf5@1.10 first in your PATH, run:
+    #   fish_add_path /opt/homebrew/opt/hdf5@1.10/bin
+    # 
+    # For compilers to find hdf5@1.10 you may need to set:
+    #   set -gx LDFLAGS "-L/opt/homebrew/opt/hdf5@1.10/lib"
+    #   set -gx CPPFLAGS "-I/opt/homebrew/opt/hdf5@1.10/include"
+
+    # set -gx HDF5_DIR /opt/homebrew/opt/hdf5@1.10/bin
+    set -gx HDF5_DIR /opt/homebrew/opt/hdf5@1.10
+    set -gx HDF5_LIBRARY_PATH /opt/homebrew/opt/hdf5@1.10/lib
+    set -gx HDF5_INCLUDE_PATH /opt/homebrew/opt/hdf5@1.10/include
+
+    # automesh links to libnetcdf.  libnetcdf (installed via Homebrew) was compiled against the 
+    # latest HDF5 (likely version 2.1.x or 1.14.x).  It is looking for libhdf5_hl.320.dylib in the
+    # default path /opt/homebrew/opt/hdf5/lib/
+    # However, because my system was downgraded to hdf5@1.10 to satisfy the Rust build script,
+    # the specific file (version .320) doesn't exist.  
+    # > ls /opt/homebrew/opt/hdf5@1.10/lib/libhdf5_hl.*
+    # gives /opt/homebrew/opt/hdf5@1.10/lib/libhdf5_hl.100.dylib
+
+    # Hybrid Solution:
+    # Install the latest HDF5 (provides the .320 version NetCDF needs)
+    #
+    # > brew install hdf5
+    #
+    # Keep HDF5_DIR pointing to 1.10 inside config.fish, perfect for building automesh
+    #
+    # set -gx HDF5_DIR /opt/homebrew/opt/hdf5@1.10
+    #
+    # This ensures that when I run cargo build, the hdf5-metno-sys crate sees the 1.10 headers
+    # it expects and doesn't panic.
+    # 
+    # Finally, fix the runtime path.  Since automesh is looking for 
+    # /opt/homebrew/opt/hdf5/libhdf5_hl.320.dylib and that path is managed by Homebrew,
+    # simply unlinking and linking the latest HDF5 should fix the "Library nout loaded" error.
+    #
+    # > brew unlink hdf5 && brew link hdf5
+    #
+    # By unlinking and linking, I essentially reset the symlinks in /opt/homebrew/opt/hdf5.
+    # The build fix: The config.fish pointed to HDF5_DIR specifically to the @1.10 folder.
+    # This allowed the Rust hdf5-metno-sys crate to find the old headers it needed to compile
+    # without panicking about H5_VERSION: "2.1.0"
+    # The runtime fix: By runing brew link hdf5, I ensured that the system-wide path
+    # /opt/homeberw/opt/hdf5/lib contained the new .320.dylib file that the NetCDF library was needing.
+    # In short, I tricked the compiler with the old version and satisfied the OS with the new one.
     
     echo "  ----------------------------------------------"
     echo "  HDF5 environment variables configured in fish:"
